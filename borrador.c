@@ -23,8 +23,8 @@ int main(){
 	long long n;
 	scanf("%lld", &n);
 
-	leerLocalidades() // a medida que lee el archivo de localidades, las guarda en una lista de cadenas (listaLocalidades (array))
-	leerPersonas() // 
+	//leerLocalidades() // a medida que lee el archivo de localidades, las guarda en una lista de cadenas (listaLocalidades (array))
+	//leerPersonas() //
 
 
 	return 0;

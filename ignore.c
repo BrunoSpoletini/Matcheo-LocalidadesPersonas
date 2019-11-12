@@ -1,5 +1,5 @@
 //        Diseño de datos
-/*/ 
+/*/
 Leer n lineas random del archivo de personas, eliminando los que ya leimos para evitar los repetidos.
 Leer el archivo de localidades y pasarlo a una lista de strings.
 Parsear el archivo de localidades. (sacarle espacios y todo lo q esta antes de la coma)
@@ -33,9 +33,9 @@ char decodeInterest(int x){
 	}
 }
 typedef struct {
-	string nombre;
-	string apellido;
-	string localidad;
+	char nombre[1010];
+	char apellido[1010];
+	char localidad[1010];
 	int edad;
 	int genero;
 	int generoInteres;
@@ -60,13 +60,13 @@ int busquedaBinaria(long long list[], long long elemento, long long n){
 }
 
 int greaterEqual(const void *a, const void *b){
-	
+   return ( *(int*)a - *(int*)b );
 }
 
 long long setRepetidos(long long list[], long long n){
 	int i, flag=0, buff[n];
-	for(i = 0; i<n-1, i++){
-		if(lista[i] == lista[i+1]){
+	for(i = 0; i<n-1; i++){
+		if(list[i] == list[i+1]){
 			flag = 1;
 			buff[i+1] = -1;
 		}
@@ -84,8 +84,8 @@ long long setRepetidos(long long list[], long long n){
 
 int hayRepetidos(long long list[], long long n){
 	int i, flag =0;
-	for(i=0, i<n-1, i++){
-		if(lista[i] == lista[i+1])
+	for(i=0; i<n-1; i++){
+		if(list[i] == list[i+1])
 			flag =1;
 	}
 	return flag;
@@ -94,8 +94,8 @@ int hayRepetidos(long long list[], long long n){
 int listRand(int n, int max){
     long long list[n], i;
     for(i=0 ;i<n ;i++){
-        list[i] = rand()% 1 + max;
-		qsort(list, list+n, greaterEqual());
+        list[i] = (rand()% 1) + max;
+		qsort(list, (list+n), greaterEqual);
     }
     while(hayRepetidos(list, n)){
 		setRepetidos(list, n);
@@ -104,9 +104,9 @@ int listRand(int n, int max){
 				list[i] = rand()% 1 + max;
 			}
 		}
-		qsort(list, list+n, greaterEqual());
+		qsort(list, list+n, greaterEqual);
 	}
-    
+
     return list;
 }
 
@@ -121,11 +121,11 @@ void leerArchivos(FILE *fp){
     char c;
     c = fgetc(fp);
     while( c != EOF){
-        
+
     }
-    
-    
-    
+
+
+
 }*/
 
 
@@ -148,18 +148,18 @@ int main(){
     long long list[n], max;
 	FILE *fp;
 	fp = fopen( "personas.txt", "r");
-       
-    
-    
+
+
+
     max=contarLineas(fp); // Max es la cantidad de lineas en el archivo
-    
+
     list=listRand(n, max);
     //leerArchivos(list);
 
 	fclose( fp );
 
 	//leerLocalidades() // a medida que lee el archivo de localidades, las guarda en una lista de cadenas (listaLocalidades (array))
-	//leerPersonas() // 
+	//leerPersonas() //
 */
 
 
