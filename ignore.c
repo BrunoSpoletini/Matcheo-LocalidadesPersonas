@@ -32,17 +32,14 @@ char decodeInterest(int x){
 			return 'N';
 	}
 }
-#define struct {
+typedef struct {
 	string nombre;
 	string apellido;
 	string localidad;
 	int edad;
 	int genero;
 	int generoInteres;
-	
-	
-	
-}persona;
+} persona;
 
 int busquedaBinaria(long long list[], long long elemento, long long n){
     long long mid, top=n, low=0;
