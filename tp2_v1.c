@@ -13,6 +13,15 @@ En la lista de personas, cambiar la codificascion de los generos.
 #include <time.h>
 
 
+typedef struct {
+	char nombre[1010];
+	char apellido[1010];
+	char localidad[1010];
+	int edad;
+	int genero;
+	int generoInteres;
+} persona;
+
 
 char decodeGender(int x){
 	if(x == 1){
@@ -41,16 +50,35 @@ char decodeInterest(int x){
     }
 }
 
-
-typedef struct {
-	char nombre[1010];
-	char apellido[1010];
-	char localidad[1010];
-	int edad;
-	int genero;
-	int generoInteres;
-} persona;
-
+char **leerArchivos(FILE *fp, long long list[], long long n){
+    char c, **stringList;
+	int linea = 0, i,k=0,j=0;
+	int flag=0;
+	stringList=(malloc(sizeof(char)*n));
+	for(i=0;i<n;i++){
+        stringList[i]=malloc(sizeof(char)*1010);
+	} //Esto hace una matriz de punteros, necesaria para poder devolver el array de chars sin que se pierda
+    c = fgetc(fp);
+    for(i=0; c != EOF && j<n; i++){
+        if(list[j]==linea){
+            stringList[j][k]=c;
+            //printf("%c",stringList[j][k]);
+            k++;
+            flag=1;
+        }
+        if(c == '\n'){
+            linea++;
+        }
+        if(c =='\n' && flag){
+            stringList[j][k]='\0';
+            j++;
+            flag=0;
+            k=0;
+        }
+        c = fgetc(fp);
+    }
+    return stringList;
+}
 
 
 int busquedaBinaria(long long list[], long long elemento, long long n){
@@ -70,8 +98,6 @@ int busquedaBinaria(long long list[], long long elemento, long long n){
     }
     return flag;
 }
-
-
 
 int hayRepetidos(long long list[], long long n){
     int i, flag =0;
@@ -126,22 +152,6 @@ void listRand(long long *list, long long n, long long max){
 }
 
 
-
-
-
-/*
-void leerArchivos(FILE *fp){
-    char c;
-    c = fgetc(fp);
-    while( c != EOF){
-
-    }
-
-
-
-}*/
-
-
 int contarLineas(FILE *fp){
     long long contador = 0;
     char c;
@@ -154,20 +164,42 @@ int contarLineas(FILE *fp){
 }
 
 int main(){
-	// este main puede contener basura
-	long long n, i, max;
+    int i,j;
+	long long n, max;
 	scanf("%lld", &n);
 	long long list[n];
-	for(i=0; i<n; i++){
-		scanf("%lld", &list[i]);
-	}
-	max = 40;
+    char **stringList;
+
+
 	listRand(list, n, max);
-	for(i=0;i<n;i++){
+
+
+	FILE *fp;
+	fp = fopen( "personas.txt", "r");
+    max = contarLineas(fp); // Max es la cantidad de lineas en el archivo
+    
+    rewind(fp); //Cuando la funcion contarLineas termina, deja el puntero del archivo apuntando al final de este, con esta funcion el puntero vuelve a apuntar al inicio
+    
+    stringList = leerArchivos(fp,list,n);
+    rewind(fp);
+    fclose( fp );
+    
+    for(i=0;i<n;i++) {
         printf("%lld\n",list[i]);
     }
-	
-	
+
+
+	for(i=0;i<n;i++) {
+	    for(j=0;stringList[i][j]!='\n';j++){
+            printf("%c",stringList[i][j]);
+	    }
+	    printf("\n");
+	    j=0;
+	    }
+
+
+    free(stringList);
+
 	return 0;
 }
 
