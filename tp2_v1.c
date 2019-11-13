@@ -50,20 +50,18 @@ char decodeInterest(int x){
     }
 }
 
-char **leerArchivos(FILE *fp, int list[], int n){
+char **leerArchivos(FILE *fp, int *list, int n){
     char c, **stringList;
-	int linea = 1, i,k=0,j=0;
-	int flag=0;
-	stringList= (char **)malloc(sizeof(char*)*n);
+	int linea = 1, i,k=0,j=0,flag=0;
+	stringList= malloc(sizeof(char*)*n);
 	for(i=0;i<n;i++){
-        stringList[i]=(char *)malloc(sizeof(char)*1010);
+        stringList[i]=malloc(sizeof(char)*1010);
 	} //Esto hace una matriz de punteros, necesaria para poder devolver el array de chars sin que se pierda
     c = fgetc(fp);
     for(i=0; c != EOF && j<n; i++){
 
         if(list[j]==linea){
             stringList[j][k]=c;
-            //printf("%c",stringList[j][k]);
             k++;
             flag=1;
         }
@@ -83,42 +81,22 @@ char **leerArchivos(FILE *fp, int list[], int n){
     return stringList;
 }
 
-/*/
-int busquedaBinaria(int list[], int elemento, int n){
-    int mid, top=n, low=0;
-    mid=top/2;
-    int flag=0;
-    while (top>=low && (!flag)){
-        if(elemento==mid){
-            flag=1;
-        }
-        if(elemento<mid){
-            top=mid-1;
-        }else{
-            low=mid+1;
-        }
-        mid=low + (top-low)/2;
-    }
-    return flag;
-}
-/*/
-int hayRepetidos(int list[], int n){
-    int i, flag =0;
-    for(i=0; i<n-1; i++){
-        if(list[i] == list[i+1])
-            flag =1;
-    }
-    return flag; // devuelve 1 si hay repetidos, 0 si no hay repetidos
-}
-
 int greaterEqual(const void *a, const void *b){
    return ( *(int*)a - *(int*)b );
 }
 
+int hayRepetidos(int *list, int n){
+    int i, flag =0;
+    for(i=0; i<n-1; i++){
+        if(list[i] == list[i+1])
+            flag = 1;
+    }
+    return flag; // devuelve 1 si hay repetidos, 0 si no hay repetidos
+}
 
 int *listRand(int n, int max){
     int i, *listRands;
-    listRands=(int *)malloc(sizeof(int)*n);
+    listRands=malloc(sizeof(int)*n);
     srand(time(NULL));
     for(i=0; i<n; i++){
 		listRands[i] = (rand()%(max-1))+1;
@@ -168,7 +146,6 @@ int main(){
     stringList = leerArchivos(fp,listRands,n);
     rewind(fp);
     fclose( fp );
-
 
 
 	for(i=0;i<n;i++) {
