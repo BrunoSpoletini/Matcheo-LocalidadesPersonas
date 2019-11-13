@@ -24,14 +24,20 @@ char decodeInterest(int x){
 	switch(x){
 		case 1:
 			return 'F';
+			break;
 		case 2:
 			return 'M';
+			break;
 		case 3:
 			return 'A';
+			break;
 		case 4:
 			return 'N';
+			break;
 	}
 }
+
+/*/
 typedef struct {
 	char nombre[1010];
 	char apellido[1010];
