@@ -52,14 +52,15 @@ char decodeInterest(int x){
 
 char **leerArchivos(FILE *fp, long long list[], long long n){
     char c, **stringList;
-	int linea = 0, i,k=0,j=0;
+	int linea = 1, i,k=0,j=0;
 	int flag=0;
-	stringList=(malloc(sizeof(char)*n));
+	stringList= (char **)malloc(sizeof(char*)*n);
 	for(i=0;i<n;i++){
-        stringList[i]=malloc(sizeof(char)*1010);
+        stringList[i]=(char *)malloc(sizeof(char)*1010);
 	} //Esto hace una matriz de punteros, necesaria para poder devolver el array de chars sin que se pierda
     c = fgetc(fp);
     for(i=0; c != EOF && j<n; i++){
+
         if(list[j]==linea){
             stringList[j][k]=c;
             //printf("%c",stringList[j][k]);
@@ -71,6 +72,7 @@ char **leerArchivos(FILE *fp, long long list[], long long n){
         }
         if(c =='\n' && flag){
             stringList[j][k]='\0';
+            printf("Linea: %d\n",linea);
             j++;
             flag=0;
             k=0;
@@ -131,7 +133,7 @@ int greaterEqual(const void *a, const void *b){
 
 void listRand(long long *list, long long n, long long max){
     int i;
-    srand(time(NULL)); 
+    srand(time(NULL));
     for(i=0; i<n; i++){
 		list[i] = (rand() % (max)) + 1;
 	}
@@ -172,21 +174,21 @@ int main(){
 
 
 	listRand(list, n, max);
-
+    for(i=0;i<n;i++) {
+        printf("%lld\n",list[i]);
+    }
 
 	FILE *fp;
 	fp = fopen( "personas.txt", "r");
     max = contarLineas(fp); // Max es la cantidad de lineas en el archivo
-    
+
     rewind(fp); //Cuando la funcion contarLineas termina, deja el puntero del archivo apuntando al final de este, con esta funcion el puntero vuelve a apuntar al inicio
-    
+
     stringList = leerArchivos(fp,list,n);
     rewind(fp);
     fclose( fp );
-    
-    for(i=0;i<n;i++) {
-        printf("%lld\n",list[i]);
-    }
+
+
 
 
 	for(i=0;i<n;i++) {
@@ -196,6 +198,7 @@ int main(){
 	    printf("\n");
 	    j=0;
 	    }
+
 
 
     free(stringList);
