@@ -37,7 +37,7 @@ char decodeInterest(int x){
 	}
 }
 
-/*/
+
 typedef struct {
 	char nombre[1010];
 	char apellido[1010];
@@ -46,6 +46,8 @@ typedef struct {
 	int genero;
 	int generoInteres;
 } persona;
+
+
 
 int busquedaBinaria(long long list[], long long elemento, long long n){
     long long mid, top=n, low=0;
@@ -65,59 +67,58 @@ int busquedaBinaria(long long list[], long long elemento, long long n){
     return flag;
 }
 
+
+
 int greaterEqual(const void *a, const void *b){
    return ( *(int*)a - *(int*)b );
 }
 
+
 long long setRepetidos(long long list[], long long n){
-	int i, flag=0, buff[n];
-	for(i = 0; i<n-1; i++){
-		if(list[i] == list[i+1]){
-			flag = 1;
-			buff[i+1] = -1;
-		}
-	}
-	if(hayRepetidos(list,n)){
-		for(i=0; i<n; i++){
-			if(buff[i] == -1){
-				list[i] = -1;
-			}
-		}
-	}
-	return list;
-}
-
-
-int hayRepetidos(long long list[], long long n){
-	int i, flag =0;
-	for(i=0; i<n-1; i++){
-		if(list[i] == list[i+1])
-			flag =1;
-	}
-	return flag;
-}
-
-int listRand(int n, int max){
-    long long list[n], i;
-    for(i=0 ;i<n ;i++){
-        list[i] = (rand()% 1) + max;
-		qsort(list, (list+n), greaterEqual);
+    int i, flag=0, buff[n];
+    for(i = 0; i<n-1; i++){
+        if(list[i] == list[i+1]){
+            flag = 1;
+            buff[i+1] = -1;
+        }
     }
-    while(hayRepetidos(list, n)){
-		setRepetidos(list, n);
-		for(i=0; i<n; i++){
-			if(list[i] == -1){
-				list[i] = rand()% 1 + max;
-			}
-		}
-		qsort(list, list+n, greaterEqual);
-	}
-
+    if(hayRepetidos(list,n)){
+        for(i=0; i<n; i++){
+            if(buff[i] == -1){
+                list[i] = -1;
+            }
+        }
+    }
     return list;
 }
 
+int hayRepetidos(long long list[], long long n){
+    int i, flag =0;
+    for(i=0; i<n-1; i++){
+        if(list[i] == list[i+1])
+            flag =1;
+    }
+    return flag;
+}
 
+long long listRand(int n, int max){
+    long long list[n], i;
+    for(i=0 ;i<n ;i++){
+        list[i] = (rand()% 1) + max;
+        qsort(list, n, sizeof(long long), greaterEqual);
+    }
+    while(hayRepetidos(list, n)){
+        setRepetidos(list, n);
+        for(i=0; i<n; i++){
+            if(list[i] == -1){
+                list[i] = rand()% 1 + max;
+            }
+        }
+        qsort(list, n, sizeof(long long), greaterEqual);
+    }
 
+    return list;
+}
 
 
 
