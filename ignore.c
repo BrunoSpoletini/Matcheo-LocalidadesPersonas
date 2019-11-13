@@ -34,6 +34,8 @@ char decodeInterest(int x){
 		case 4:
 			return 'N';
 			break;
+		default:
+			return 'E';
 	}
 }
 
@@ -73,12 +75,20 @@ int greaterEqual(const void *a, const void *b){
    return ( *(int*)a - *(int*)b );
 }
 
+int hayRepetidos(long long list[], long long n){
+    int i, flag =0;
+    for(i=0; i<n-1; i++){
+        if(list[i] == list[i+1])
+            flag =1;
+    }
+    return flag;
+}
 
-long long setRepetidos(long long list[], long long n){
-    int i, flag=0, buff[n];
+
+void setRepetidos(long long list[], long long n){
+    int i, buff[n];
     for(i = 0; i<n-1; i++){
         if(list[i] == list[i+1]){
-            flag = 1;
             buff[i+1] = -1;
         }
     }
@@ -89,26 +99,17 @@ long long setRepetidos(long long list[], long long n){
             }
         }
     }
-    return list;
 }
 
-int hayRepetidos(long long list[], long long n){
-    int i, flag =0;
-    for(i=0; i<n-1; i++){
-        if(list[i] == list[i+1])
-            flag =1;
-    }
-    return flag;
-}
 
 long long listRand(int n, int max){
     long long list[n], i;
     for(i=0 ;i<n ;i++){
         list[i] = (rand()% 1) + max;
-        qsort(list, n, sizeof(long long), greaterEqual);
     }
+	qsort(list, n, sizeof(long long), greaterEqual);
     while(hayRepetidos(list, n)){
-        setRepetidos(list, n);
+        setRepetidos(list, n); //esta funcion retorna un array, y la esta tirando ahi suelta
         for(i=0; i<n; i++){
             if(list[i] == -1){
                 list[i] = rand()% 1 + max;
@@ -117,7 +118,7 @@ long long listRand(int n, int max){
         qsort(list, n, sizeof(long long), greaterEqual);
     }
 
-    return list;
+    return *list;
 }
 
 
