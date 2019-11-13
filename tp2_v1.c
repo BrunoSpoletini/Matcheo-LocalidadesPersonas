@@ -13,9 +13,6 @@ En la lista de personas, cambiar la codificascion de los generos.
 //     Falta pasar los nombres de los
 //     archivos como parametros del main.
 //
-//   leerPersonas creo que copia el caracter del \n, hay que cambiar eso,
-//    y la funcion mostrarPersonas, que el loop pase cuando encuentre un \0,
-//    no un \n
 //___________________________________________________
 
 #include <stdio.h>
@@ -174,10 +171,13 @@ void mostrarLista(char **stringList, int n){
 	    j=0;
 	    }
 }
-/*/
-struct persona *transformarEnEstructura(char **stringList, int n){
-    struct persona *list;
+
+persona *transformarEnEstructura(char **stringList, int n){
+    persona *list;
     list=malloc(sizeof(persona)*n);
+
+    list[0].nombre[0]='c';
+
     int i,j,buff=0,contcomas=0;
     for(i=0;i<n;i++){
         for(j=0; stringList[i][j]!='\0'; j++){
@@ -215,7 +215,7 @@ struct persona *transformarEnEstructura(char **stringList, int n){
 
     return list;
 }
-/*/
+
 int main(){
     int i ,j ,n ,max , *listRands;
 	char **arrayPersonas, **arrayLocalidades;
