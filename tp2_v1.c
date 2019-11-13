@@ -6,6 +6,18 @@ Parsear el archivo de localidades. (sacarle espacios y todo lo q esta antes de l
 En la lista de personas, cambiar la codificascion de los generos.
 /*/
 
+
+// ___________________________________________
+//
+//
+//     Falta pasar los nombres de los
+//     archivos como parametros del main.
+//
+//   leerPersonas creo que copia el caracter del \n, hay que cambiar eso,
+//    y la funcion mostrarPersonas, que el loop pase cuando encuentre un \0,
+//    no un \n
+//___________________________________________________
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -17,9 +29,9 @@ typedef struct {
 	char nombre[1010];
 	char apellido[1010];
 	char localidad[1010];
-	int edad;
-	int genero;
-	int generoInteres;
+	char edad[1010];
+	char genero[10];
+	char generoInteres[10];
 } persona;
 
 
@@ -66,14 +78,13 @@ char **leerArchivos(FILE *fp, int *list, int n){
             flag=1;
         }
         if(c =='\n'){
+            linea++;
             if(flag){
-            stringList[j][k]='\0';
-            printf("Linea: %d\n",linea);
-            j++;
-            flag=0;
-            k=0;
-            }else{
-                linea++;
+                stringList[j][k-1]='\0';
+                printf("Linea: %d\n",linea-1);
+                j++;
+                flag=0;
+                k=0;
             }
         }
         c = fgetc(fp);
@@ -125,39 +136,124 @@ int contarLineas(FILE *fp){
     return contador;
 }
 
-int main(){
-    int i ,j ,n ,max , *listRands;
-	char **stringList;
-    scanf("%d", &n);
-
-	printf("Hola: %d", n);
-
-	FILE *fp;
-	fp = fopen( "personas.txt", "r");
-    max = contarLineas(fp); // Max es la cantidad de lineas en el archivo
-
-    listRands=listRand(n, max);
-    for(i=0;i<n;i++) {
-        printf("%d\n",listRands[i]);
+char **leerLocalidades(FILE *fp, int max){
+    //          -- Hay que hacer que la funcion lea el archivo mientras va 
+    //          pasando los datos, sin tener que llamar a la funcion contarLineas--
+    char c, **stringList;
+	int i=0, j=0,linea=0,indice=0;
+	stringList= malloc(sizeof(char*)*max);
+	for(i=0;i<max;i++){
+        stringList[i]=malloc(sizeof(char)*1010);
     }
+    for(c = fgetc(fp); c != EOF; c = fgetc(fp)){
+        if(!(c>47 && c<58) && c!=','){
+            stringList[indice][j]=c;
+            j++;
+            if(c == '\n'){
+                stringList[indice][j-1]='\0';
+                j=0;
+                indice++;
+            }
+            if(c==' ' && stringList[indice][j-2]==' '){
+                stringList[indice][j-1]='\0';
+                i++;
+            }
+        }
+        }
+    return stringList;
 
-    rewind(fp); //Cuando la funcion contarLineas termina, deja el puntero del archivo apuntando al final de este, con esta funcion el puntero vuelve a apuntar al inicio
+}
 
-    stringList = leerArchivos(fp,listRands,n);
-    rewind(fp);
-    fclose( fp );
-
-
-	for(i=0;i<n;i++) {
-	    for(j=0;stringList[i][j]!='\n';j++){
+void mostrarLista(char **stringList, int n){
+    int i,j;
+    for(i=0;i<n;i++) {
+	    for(j=0;stringList[i][j]!='\0';j++){
             printf("%c",stringList[i][j]);
 	    }
 	    printf("\n");
 	    j=0;
 	    }
+}
+/*/
+struct persona *transformarEnEstructura(char **stringList, int n){
+    struct persona *list;
+    list=malloc(sizeof(persona)*n);
+    int i,j,buff=0,contcomas=0;
+    for(i=0;i<n;i++){
+        for(j=0; stringList[i][j]!='\0'; j++){
+            if(stringList[i][j]==','){
+                buff=0;
+                contcomas++;
+            }else{
+                switch(contcomas){
+                case 0:
+                    list[i].nombre[buff]=stringList[i][j];
+                    buff++;
+                    break;
+                case 1:
+                    list[i].apellido[buff]=stringList[i][j];
+                    buff++;
+                    break;
+                case 2:
+                    //list[i].localidad[buff]=stringList[i][j];  // COMPLETAR                     buff++;
+                    break;
+                case 3:
+                    list[i].edad[buff]=stringList[i][j];
+                    buff++;
+                    break;
+                case 4:
+                    list[i].genero[0]=decodeGender(stringList[i][j]);
+                    break;
+                default:
+                    list[i].generoInteres[0]=decodeInterest(stringList[i][j]);
+            }
+            }
+        }
+
+
+    }
+
+    return list;
+}
+/*/
+int main(){
+    int i ,j ,n ,max , *listRands;
+	char **arrayPersonas, **arrayLocalidades;
+    struct persona *listaStructPersonas;
+    scanf("%d", &n);
+	FILE *fp;
+ 
+    //>Lectura de personas<
+	fp = fopen( "personas.txt", "r");
+    max = contarLineas(fp); // Max es la cantidad de lineas en el archivo
+    listRands=listRand(n, max);
+    for(i=0;i<n;i++) {printf("%d\n",listRands[i]);}
+    rewind(fp);
+    arrayPersonas = leerArchivos(fp,listRands,n);
+    //mostrarLista(arrayPersonas,n); Muestra la lista de personas
+    rewind(fp);
+    fclose( fp );
+
+    //>Pasaje de lista de strings a lista de estructuras
+    //listaStructPersonas=transformarEnEstructura(arrayPersonas, n);
+
+
+    //>Lectura de localidades<
+	fp = fopen("codigoLocalidades.txt", "r");
+    
+    max = contarLineas(fp);
+    rewind(fp);
+    arrayLocalidades=leerLocalidades(fp, max);
+    //mostrarLista(arrayLocalidades,max); Muestra la lista de ciudades
+    fclose( fp );
+
+
+
+    
 
     free(listRands);
-    free(stringList);
+    free(arrayPersonas);
+    free(listaStructPersonas);
 
 	return 0;
 }
