@@ -109,7 +109,7 @@ long long listRand(int n, int max){
     }
 	qsort(list, n, sizeof(long long), greaterEqual);
     while(hayRepetidos(list, n)){
-        setRepetidos(list, n); //esta funcion retorna un array, y la esta tirando ahi suelta
+        setRepetidos(list, n);
         for(i=0; i<n; i++){
             if(list[i] == -1){
                 list[i] = rand()% 1 + max;
@@ -124,17 +124,20 @@ long long listRand(int n, int max){
 
 
 
-/*
-void leerArchivos(FILE *fp){
-    char c;
+
+void leerArchivos(FILE *fp, long long list[], long long n){
+    char c, stringList[n][10010];
+	int linea = 0;
     c = fgetc(fp);
     while( c != EOF){
-
+		if(linea[i]==linea){
+			
+		}
+		if(c == '\n'){
+			linea++;
+		}
     }
-
-
-
-}*/
+}
 
 
 int contarLineas(FILE *fp){
@@ -150,7 +153,7 @@ int contarLineas(FILE *fp){
 
 
 int main(){
-   /* long long n;
+    long long n;
 
     scanf("%lld", &n);
     long long list[n], max;
@@ -161,14 +164,18 @@ int main(){
 
     max=contarLineas(fp); // Max es la cantidad de lineas en el archivo
 
-    list=listRand(n, max);
+    list[0]=listRand(n, max);
     //leerArchivos(list);
 
 	fclose( fp );
+	int i;
+	for(i=0;i<n;i++){
+		printf("%lld\n",list[i]);
+	}
 
 	//leerLocalidades() // a medida que lee el archivo de localidades, las guarda en una lista de cadenas (listaLocalidades (array))
 	//leerPersonas() //
-*/
+
 
 
     return 0;
