@@ -50,7 +50,7 @@ char decodeInterest(int x){
     }
 }
 
-char **leerArchivos(FILE *fp, long long list[], long long n){
+char **leerArchivos(FILE *fp, int list[], int n){
     char c, **stringList;
 	int linea = 1, i,k=0,j=0;
 	int flag=0;
@@ -67,24 +67,25 @@ char **leerArchivos(FILE *fp, long long list[], long long n){
             k++;
             flag=1;
         }
-        if(c == '\n'){
-            linea++;
-        }
-        if(c =='\n' && flag){
+        if(c =='\n'){
+            if(flag){
             stringList[j][k]='\0';
             printf("Linea: %d\n",linea);
             j++;
             flag=0;
             k=0;
+            }else{
+                linea++;
+            }
         }
         c = fgetc(fp);
     }
     return stringList;
 }
 
-
-int busquedaBinaria(long long list[], long long elemento, long long n){
-    long long mid, top=n, low=0;
+/*/
+int busquedaBinaria(int list[], int elemento, int n){
+    int mid, top=n, low=0;
     mid=top/2;
     int flag=0;
     while (top>=low && (!flag)){
@@ -100,8 +101,8 @@ int busquedaBinaria(long long list[], long long elemento, long long n){
     }
     return flag;
 }
-
-int hayRepetidos(long long list[], long long n){
+/*/
+int hayRepetidos(int list[], int n){
     int i, flag =0;
     for(i=0; i<n-1; i++){
         if(list[i] == list[i+1])
@@ -110,52 +111,33 @@ int hayRepetidos(long long list[], long long n){
     return flag; // devuelve 1 si hay repetidos, 0 si no hay repetidos
 }
 
-void setRepetidos(long long list[], long long n){
-    int i, buff[n];
-    memset(buff, 0, sizeof(buff)); // setea el buffer para contener solo 0s
-    for(i = 0; i<n; i++){
-        if(list[i] == list[i+1]){
-            buff[i+1] = -1;
-        }
-    }
-	for(i=0; i<n; i++){
-		if(buff[i] == -1){
-			list[i] = -1;
-		}
-	}
-	// setea todos los numeros repetidos menos uno en -1
-}
-
 int greaterEqual(const void *a, const void *b){
    return ( *(int*)a - *(int*)b );
 }
 
 
-void listRand(long long *list, long long n, long long max){
-    int i;
+int *listRand(int n, int max){
+    int i, *listRands;
+    listRands=(int *)malloc(sizeof(int)*n);
     srand(time(NULL));
     for(i=0; i<n; i++){
-		list[i] = (rand() % (max)) + 1;
+		listRands[i] = (rand()%(max-1))+1;
 	}
-	qsort(list, n, sizeof(long long), greaterEqual); // sortea la lista inicial de randoms (puede tener repetidos)
-    while(hayRepetidos(list, n)){
-        setRepetidos(list, n);
+	qsort(listRands, n, sizeof(int), greaterEqual); // sortea la lista inicial de randoms (puede tener repetidos)
+    while(hayRepetidos(listRands, n)){
         for(i=0; i<n; i++){
-            if(list[i] == -1){
-                list[i] = rand()% 1 + max;
+            if(listRands[i] == listRands[i+1]){
+                listRands[i] = (rand()%(max-1))+1;
             }
         }
-        qsort(list, n, sizeof(long long), greaterEqual);
-        // mientras haya repetidos, se setean los repetidos menos uno en -1
-        // luego se rellena esas posiciones con nuevos enteros random
-        // se vuelve a sortear la lista y se repite el procedimiento en caso
-        // que siga habiendo elementos repetidos
+        qsort(listRands, n, sizeof(int), greaterEqual);
     }
+    return listRands;
 }
 
 
 int contarLineas(FILE *fp){
-    long long contador = 0;
+    int contador = 0;
     char c;
     for(c = getc(fp); c != EOF; c = getc(fp)){
         if(c == '\n'){
@@ -166,28 +148,26 @@ int contarLineas(FILE *fp){
 }
 
 int main(){
-    int i,j;
-	long long n, max;
-	scanf("%lld", &n);
-	long long list[n];
-    char **stringList;
+    int i ,j ,n ,max , *listRands;
+	char **stringList;
+    scanf("%d", &n);
 
-
-	listRand(list, n, max);
-    for(i=0;i<n;i++) {
-        printf("%lld\n",list[i]);
-    }
+	printf("Hola: %d", n);
 
 	FILE *fp;
 	fp = fopen( "personas.txt", "r");
     max = contarLineas(fp); // Max es la cantidad de lineas en el archivo
 
+    listRands=listRand(n, max);
+    for(i=0;i<n;i++) {
+        printf("%d\n",listRands[i]);
+    }
+
     rewind(fp); //Cuando la funcion contarLineas termina, deja el puntero del archivo apuntando al final de este, con esta funcion el puntero vuelve a apuntar al inicio
 
-    stringList = leerArchivos(fp,list,n);
+    stringList = leerArchivos(fp,listRands,n);
     rewind(fp);
     fclose( fp );
-
 
 
 
@@ -199,8 +179,7 @@ int main(){
 	    j=0;
 	    }
 
-
-
+    free(listRands);
     free(stringList);
 
 	return 0;
