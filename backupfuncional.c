@@ -21,7 +21,7 @@ En la lista de personas, cambiar la codificascion de los generos.
 #include <string.h>
 #include <time.h>
 
-/*
+
 typedef struct {
 	char nombre[1010];
 	char apellido[1010];
@@ -30,7 +30,7 @@ typedef struct {
 	char genero[10];
 	char generoInteres[10];
 } persona;
-*/
+
 
 char decodeGender(int x){
 	if(x == 1){
@@ -137,7 +137,6 @@ int contarLineas(FILE *fp){
     return contador;
 }
 
-/*
 char **leerLocalidades(FILE *fp, int max){
     //          -- Hay que hacer que la funcion lea el archivo mientras va 
     //          pasando los datos, sin tener que llamar a la funcion contarLineas--
@@ -164,9 +163,8 @@ char **leerLocalidades(FILE *fp, int max){
         }
     return stringList;
 
-}*/
+}
 
-//funcion de debbuggeo
 void mostrarLista(char **stringList, int n){
     int i,j;
     for(i=0;i<n;i++) {
@@ -175,13 +173,14 @@ void mostrarLista(char **stringList, int n){
 	    }
 	    printf("\n");
 	    j=0;
-	}
+	    }
 }
-//fin funcion de debuggeo
-/*
+
 persona *transformarEnEstructura(char **stringList, int n){
     persona *list;
     list=malloc(sizeof(persona)*n);
+
+    list[0].nombre[0]='c';
 
     int i,j,buff=0,contcomas=0;
     for(i=0;i<n;i++){
@@ -211,7 +210,7 @@ persona *transformarEnEstructura(char **stringList, int n){
                     break;
                 default:
                     list[i].generoInteres[0]=decodeInterest(stringList[i][j]);
-				}
+            }
             }
         }
 
@@ -220,49 +219,11 @@ persona *transformarEnEstructura(char **stringList, int n){
 
     return list;
 }
-*/
-
-//devuelve los numeros a leer de la lista de arhivos
-char **listaLocalidades(char **listStrings, int largoArchivo){ // lista de usuarios, largo de la lista de usuarios
-	int i, cuentaComas = 0;
-	char **lista;
-	lista = malloc(sizeof(char*) * largoArchivo);
-	char buffer[1010];
-	char *ptr;
-	const char* delimitador = (char*)',';
-	for(i = 0; i < largoArchivo; i++){
-		strcpy(buffer, listStrings[i]);
-			ptr = strtok(buffer, delimitador);
-			cuentaComas++;
-			while(ptr != NULL){
-				ptr = strtok(NULL, delimitador);
-				cuentaComas++;
-			}
-			if(cuentaComas == 2){
-				lista[i] = ptr;
-			}
-	}
-	return lista;
-}
-
-int *charToInt(char **list, int n){
-	int i, buffer, *copiaList;
-	copiaList=malloc(sizeof(int)*n);
-	
-	for(i=0;i<n;i++){
-		buffer=atoi(list[i]);
-		copiaList[i]=buffer;
-	}
-	
-	
-	
-	return copiaList;
-}
 
 int main(){
-    int i,n ,max , *listRands, *arrayNumsLocalidadesInt;
-	char **arrayPersonas, **arrayLocalidades,**arrayNumsLocalidadesChar;
-   // struct persona *listaStructPersonas;
+    int i ,j ,n ,max , *listRands;
+	char **arrayPersonas, **arrayLocalidades;
+    struct persona *listaStructPersonas;
     scanf("%d", &n);
 	FILE *fp;
  
@@ -277,30 +238,26 @@ int main(){
     rewind(fp);
     fclose( fp );
 
+    //>Pasaje de lista de strings a lista de estructuras
+    //listaStructPersonas=transformarEnEstructura(arrayPersonas, n);
 
-
-	//>Lista de localidades a leer del archivo localidades.txt (array de int's)
-	//arrayNumsLocalidadesChar=listaLocalidades(arrayPersonas,n);
-    //arrayNumsLocalidadesInt=charToInt(arrayNumsLocalidadesChar,n);
-	//for(i=0;i<n;i++) {printf("%d\n",arrayNumsLocalidadesInt[i]);}
-
-/*
 
     //>Lectura de localidades<
 	fp = fopen("codigoLocalidades.txt", "r");
     
     max = contarLineas(fp);
     rewind(fp);
+    arrayLocalidades=leerLocalidades(fp, max);
+    //mostrarLista(arrayLocalidades,max); Muestra la lista de ciudades
+    fclose( fp );
+
+
+
     
-	arrayLocalidades=leerArchivos(fp, arrayNumsLocalidadesInt, n);
-    mostrarLista(arrayLocalidades,max); //Muestra la lista de ciudades
-    fclose(fp);
-    
-*/
+
     free(listRands);
     free(arrayPersonas);
-    //free(arrayNumsLocalidadesInt);
-    //free(listaStructPersonas);
+    free(listaStructPersonas);
 
 	return 0;
 }
