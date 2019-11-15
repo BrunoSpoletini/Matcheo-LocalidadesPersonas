@@ -332,7 +332,7 @@
 332,SANTA TERESA                                      
 333,PEJIBAYE                                          
 334,SANTO TOMAS                                       
-335,PEÑAS BLANCAS                                     
+335,PEï¿½AS BLANCAS                                     
 336,AGUILA ABAJO                                      
 337,SAN PABLO                                         
 338,ZAPOTE                                            
@@ -537,7 +537,7 @@
 537,ALTO VILLEGAS                                         
 538,CONCEPCION                                            
 539,SAN ANTONIO DE ZAPOTAL                                
-540,SAN ISIDRO DE PEÑAS BLANCAS                           
+540,SAN ISIDRO DE PEï¿½AS BLANCAS                           
 541,CARRERA BUENA                                         
 542,BOLIVAR                                  
 543,LA ESPERANZA                                          
@@ -550,7 +550,7 @@
 550,SECTOR LOS ANGELES                                    
 551,CATARATA                                              
 552,VALLE AZUL                                            
-553,BAJO ZUÑIGA                                           
+553,BAJO ZUï¿½IGA                                           
 554,SOCORRO                                               
 555,LA GUARIA                                             
 556,ANGOSTURA                                             
@@ -573,7 +573,7 @@
 573,RINCON DE ARIAS                                          
 574,LA ARENA                                  
 575,CALLE RODRIGUEZ                                          
-576,CATALUÑA                                                 
+576,CATALUï¿½A                                                 
 577,PUENTE DE PIEDRA                                         
 578,RINCON DE SALAS                                          
 579,LOS ANGELES DE BOLIVAR                                   
@@ -635,7 +635,7 @@
 635,CIRRI SUR                                               
 636,LLANO BONITO O CIRRI NORTE                              
 637,SAN ROQUE                                               
-638,CAÑUELA ARRIBA                                          
+638,CAï¿½UELA ARRIBA                                          
 639,SAN JERONIMO                                            
 640,LOS ROBLES                                              
 641,SAN FRANCISCO                            
@@ -766,7 +766,7 @@
 766,C.P. NELSON MANDELA                                  
 767,H.A. SAN VICENTE DE PAUL                             
 768,ABUNDANCIA                                           
-769,SAN JOSE DE LA MONTAÑA                               
+769,SAN JOSE DE LA MONTAï¿½A                               
 770,SAN PABLO                                            
 771,CONCEPCION                                           
 772,EL CORTE                               
@@ -823,7 +823,7 @@
 823,VILLANUEVA                                                
 824,PORVENIR                                                  
 825,NAZARETH                                                  
-826,MORENO CAÑAS                                              
+826,MORENO CAï¿½AS                                              
 827,COLONIA BLANCA                                            
 828,LLANO AZUL                                                
 829,SAN RAFAEL O CHIMURRIA ABAJO                              
@@ -840,7 +840,7 @@
 840,HIGUERON                                 
 841,LOS CHILES                                           
 842,ARCO IRIS                                            
-843,CAÑO NEGRO                                           
+843,CAï¿½O NEGRO                                           
 844,SAN JOSE DEL AMPARO                                  
 845,PORVENIR DE SAN JORGE                                
 846,MEDIO QUESO                                          
@@ -884,7 +884,7 @@
 884,SANTA ISABEL                                         
 885,LA VICTORIA                             
 886,SAN VICENTE                                          
-887,LA ESPAÑOLITA                                        
+887,LA ESPAï¿½OLITA                                        
 888,PATA DE GALLO                  
 889,OCCIDENTAL                                               
 890,ORIENTAL                                                 
@@ -960,7 +960,7 @@
 960,LINDA VISTA                                             
 961,SAN FRANCISCO                                           
 962,LA CIMA                                                 
-963,JUAN VIÑAS                                               
+963,JUAN VIï¿½AS                                               
 964,ALTO VICTORIA                                            
 965,SANTA MARTA                                              
 966,EL NARANJO                                               
@@ -1024,11 +1024,11 @@
 1024,SAUCE                                                  
 1025,JICOTEA                                                
 1026,SAN RAFAEL                                             
-1027,SIMIRIÑAC                                      
+1027,SIMIRIï¿½AC                                      
 1028,ALTO PACUARE ARRIBA                           
 1029,JAKI                   
-1030,BOLORI ÑAC                              
-1031,NIMARI-ÑAC                                 
+1030,BOLORI ï¿½AC                              
+1031,NIMARI-ï¿½AC                                 
 1032,NAMALDI                                                
 1033,TSIPIRI                           
 1034,AZUL                                                   
@@ -1074,7 +1074,7 @@
 1074,BARRIO NUEVO                                           
 1075,TABLON                                                 
 1076,PATIO DE AGUA                                          
-1077,CAÑON                                
+1077,CAï¿½ON                                
 1078,PURIRES                                
 1079,CARAGRAL                                               
 1080,LA CANGREJA                                            
@@ -1096,7 +1096,7 @@
 1096,GUARARI                                                  
 1097,BARVA                                                      
 1098,SAN PEDRO                                                  
-1099,SAN JOSE DE LA MONTAÑA                                     
+1099,SAN JOSE DE LA MONTAï¿½A                                     
 1100,SAN PABLO                                                  
 1101,SAN ROQUE                                                  
 1102,SANTA LUCIA                                                
@@ -1142,7 +1142,7 @@
 1142,SANTA ELENA                                           
 1143,SANTA CECILIA                                
 1144,C.P. SAN ISIDRO JUVENIL ZURQUI                        
-1145,H.A. SEÑORA DE LOS ANGELES                            
+1145,H.A. SEï¿½ORA DE LOS ANGELES                            
 1146,SAN ANTONIO                                                
 1147,LA RIBERA                                                  
 1148,LA ASUNCION                                                
@@ -1200,10 +1200,10 @@
 1200,H.A. SAN AGUSTIN                                       
 1201,LIBERIA                                               
 1202,GUARDIA                                               
-1203,CAÑAS DULCES                                          
+1203,CAï¿½AS DULCES                                          
 1204,QUEBRADA GRANDE O GARCIA FLAMENCO                     
 1205,CURUBANDE                                             
-1206,BUENAVISTA DE CAÑAS DULCES                            
+1206,BUENAVISTA DE CAï¿½AS DULCES                            
 1207,IRIGARAY                                              
 1208,LAS LILAS                                             
 1209,CERECEDA                                  
@@ -1254,12 +1254,12 @@
 1254,POZO DE AGUA                                           
 1255,BOCAS DE NOSARA                                        
 1256,EL ROBLAR                                              
-1257,EL CAÑAL                                               
+1257,EL CAï¿½AL                                               
 1258,NAMBI                                                  
 1259,CUAJINIQUIL                                            
 1260,FLORIDA                                                
 1261,MORACIA                                                
-1262,RIO MONTAÑA                                            
+1262,RIO MONTAï¿½A                                            
 1263,TERCIOPELO                                             
 1264,TALOLINGA                                              
 1265,CURIME                                                 
@@ -1285,10 +1285,10 @@
 1285,EL FLOR                                      
 1286,MATAMBUGUITO                                           
 1287,CASITAS                                                
-1288,GARCIMUÑOZ                                             
+1288,GARCIMUï¿½OZ                                             
 1289,ACOYAPA                                                
 1290,H.A. SAN BLAS                                          
-1291,MONTAÑITA                                              
+1291,MONTAï¿½ITA                                              
 1292,RIO GRANDE                                             
 1293,SANTA CRUZ                                         
 1294,ARADO                                              
@@ -1318,7 +1318,7 @@
 1318,VISTAMAR                                
 1319,POTRERO                                            
 1320,OSTIONAL                                           
-1321,SAN JOSE DE LA MONTAÑA                             
+1321,SAN JOSE DE LA MONTAï¿½A                             
 1322,EL SOCORRO                                         
 1323,PALMARES                                           
 1324,LORENA                                             
@@ -1333,7 +1333,7 @@
 1333,TALOLINGUITA                                       
 1334,SAN PEDRO                                          
 1335,GUAITIL                                            
-1336,H.A. NUESTRA SEÑORA DEL ROSARIO                    
+1336,H.A. NUESTRA SEï¿½ORA DEL ROSARIO                    
 1337,CHIRCO                                             
 1338,BAGACES                                               
 1339,MONTANO                                               
@@ -1363,7 +1363,7 @@
 1363,SANTO DOMINGO                                        
 1364,LOS PLANES                                           
 1365,EL COCO                                              
-1366,RIO CAÑAS NUEVO                                      
+1366,RIO CAï¿½AS NUEVO                                      
 1367,LA GUINEA                                            
 1368,CORRALILLO                                           
 1369,PANAMA O CACIQUE                                     
@@ -1374,7 +1374,7 @@
 1374,LIBERTAD                                    
 1375,PASO TEMPISQUE                      
 1376,ALTOS DEL ROBLE                                      
-1377,CAÑAS                                                   
+1377,CAï¿½AS                                                   
 1378,HIGUERON ABAJO                                          
 1379,PALMIRA                                                 
 1380,BEBEDERO                                  
@@ -1391,7 +1391,7 @@
 1391,SAN MARTIN                                              
 1392,LAS PALMAS                                              
 1393,H.A MARY BLANCO                                         
-1394,URB. LAS CAÑAS                                          
+1394,URB. LAS CAï¿½AS                                          
 1395,LAS JUNTAS                                          
 1396,SANTA LUCIA                                         
 1397,LA SIERRA                               
@@ -1411,17 +1411,17 @@
 1411,MATAPALO                                            
 1412,BARRIO JESUS                                        
 1413,RANCHO ANIA O LOURDES                       
-1414,CAÑITAS                                             
-1415,COYOLITO DE ABANGARES O LA PEÑA                     
+1414,CAï¿½ITAS                                             
+1415,COYOLITO DE ABANGARES O LA PEï¿½A                     
 1416,TORNOS                                              
 1417,H.A. SAN JORGE                                      
 1418,RAIZAL                                              
 1419,LA CONCHA                              
-1420,PEÑAS BLANCAS                                       
+1420,PEï¿½AS BLANCAS                                       
 1421,TILARAN                                               
 1422,QUEBRADA GRANDE                                       
 1423,SAN RAMON                                             
-1424,CABECERAS DE CAÑAS                                    
+1424,CABECERAS DE CAï¿½AS                                    
 1425,TRONADORA                                             
 1426,AGUACATE                                 
 1427,LOS ANGELES                             
@@ -1506,7 +1506,7 @@
 1506,SARMIENTO                                             
 1507,LAGARTO SUR                                           
 1508,LEPANTO                                               
-1509,MONTAÑA GRANDE                                        
+1509,MONTAï¿½A GRANDE                                        
 1510,JICARAL                                               
 1511,PAQUERA                                               
 1512,TAMBOR                                                
@@ -1595,7 +1595,7 @@
 1595,JUANILAMA                                             
 1596,SALINAS                                               
 1597,MACACONA                                              
-1598,PEÑA BLANCA                                           
+1598,PEï¿½A BLANCA                                           
 1599,MESETAS ABAJO                                         
 1600,SAN RAFAEL                                            
 1601,GUADALUPE O MARATON                                   
@@ -1603,7 +1603,7 @@
 1603,MOJON                                                 
 1604,SAN JERONIMO                                          
 1605,CERRILLOS                                             
-1606,MARAÑONAL                              
+1606,MARAï¿½ONAL                              
 1607,PARAISO O BRUSELAS                                    
 1608,H.A. CARLOS VENEGAS                                   
 1609,TIVIVES                                               
@@ -1654,10 +1654,10 @@
 1654,COLORADO                                         
 1655,EL CARMEN                                        
 1656,CONVENTO                                         
-1657,CAÑAS                                            
+1657,CAï¿½AS                                            
 1658,SAN CARLOS                                       
 1659,SHAMBA                                           
-1660,CAÑO BRAVO                                       
+1660,CAï¿½O BRAVO                                       
 1661,SANTA CRUZ                                       
 1662,PALMITAL                                         
 1663,MIRAMAR                                         
@@ -1702,7 +1702,7 @@
 1702,JALACA                                      
 1703,SINAI                                                     
 1704,RANCHO QUEMADO O DELICIAS                                 
-1705,CAÑABLANCAL                                               
+1705,CAï¿½ABLANCAL                                               
 1706,EL PROGRESO                                               
 1707,FINCA GUANACASTE                           
 1708,H.A. PALMAR SUR                                           
@@ -1736,8 +1736,8 @@
 1736,GOLFITO                                               
 1737,PUERTO JIMENEZ                                        
 1738,LA PALMA O INDEPENDENCIA                              
-1739,CAÑAZA DE JIMENEZ                                     
-1740,VILLA BRICEÑO                                  
+1739,CAï¿½AZA DE JIMENEZ                                     
+1740,VILLA BRICEï¿½O                                  
 1741,CONTE DE PAVON                                        
 1742,FLORIDA                                       
 1743,ZANCUDO                                
@@ -1752,14 +1752,14 @@
 1752,VALLE DE LOS CEDROS O SAN MIGUEL                      
 1753,KILOMETRO 16                                          
 1754,BAHIA DE PAVON                       
-1755,LA PEÑA DE BURICA                                     
+1755,LA PEï¿½A DE BURICA                                     
 1756,CARACOL NORTE                                 
 1757,GUAYMI DE BURICA                                      
 1758,ALTO CONTE                              
 1759,VIQUILLAS                                             
 1760,PROGRESO DE CONTEBURICA                               
 1761,CACAO                                                 
-1762,RESIDENCIAL UREÑA                                     
+1762,RESIDENCIAL UREï¿½A                                     
 1763,ESCUADRA                                              
 1764,LAGARTO                                    
 1765,KILOMETRO 20                                          
@@ -1780,7 +1780,7 @@
 1780,LA UNION DE LIMONCITO                               
 1781,SAN RAFAEL DE LIMONCITO                             
 1782,SABANILLA                                           
-1783,CAÑAS GORDAS                                        
+1783,CAï¿½AS GORDAS                                        
 1784,COPAL                                               
 1785,SAN FRANCISCO DE AGUA BUENA                         
 1786,EL VALLE                                            
@@ -1847,7 +1847,7 @@
 1847,COTO CUARENTA Y DOS                                
 1848,COTO CUARENTA Y SIETE                              
 1849,ABROJO NORTE                        
-1850,CAMPIÑA                                            
+1850,CAMPIï¿½A                                            
 1851,LA CUESTA                                          
 1852,LAUREL                                             
 1853,CANOAS                                             
@@ -1968,7 +1968,7 @@
 1968,LLANO BONITO                                                
 1969,ASTUA PIRIE                                                 
 1970,PROGRESO                                                    
-1971,SAN FRANCISCO DE CAÑO SECO                                  
+1971,SAN FRANCISCO DE CAï¿½O SECO                                  
 1972,LINDA VISTA                                                 
 1973,BUENOS AIRES                                                
 1974,SAN MARTIN                                                  
@@ -2117,7 +2117,7 @@
 2117,MOSCU                                                    
 2118,SINGAPUR                                              
 2119,BERNA                                                    
-2120,PUERTO ESPAÑA                                
+2120,PUERTO ESPAï¿½A                                
 2121,MONTEVIDEO                                             
 2122,CARACAS                                              
 2123,NUEVA DELHI                                              

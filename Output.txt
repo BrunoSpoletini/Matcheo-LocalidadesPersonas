@@ -1,0 +1,10 @@
+HAYDEE,NARANJO,ABROJO-MONTEZUMA                                   ,83,F,N
+CECILIA,MASIS,SAN RAFAEL                                              ,14,F,A
+FERNANDO,MORA,CANADA                                                 ,48,M,A
+ABILIAN,CHAVARRIA,H.A. SAN RAFAEL                                         ,76,M,M
+IMELDA DEL CARMEN,CHAVES,LA AURORA                                    ,9,F,A
+GLADYS,VEGA,PALMIRA                                              ,16,F,F
+NORMAN,PICADO,SAN ROQUE                                               ,36,M,A
+MARINA,QUESADA,PURIRES                                ,27,F,N
+ANA CECILIA,ARCE,LA JULIETA                                            ,28,F,N
+MARIA ANTONIETA,VELAZCO,DRAKE                                       ,60,F,M
