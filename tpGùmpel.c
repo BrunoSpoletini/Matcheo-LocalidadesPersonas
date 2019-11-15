@@ -90,7 +90,7 @@ int *listRand(int n, int max){
 	qsort(listRands, n, sizeof(int), greaterEqual);
     while(hayRepetidos(listRands, n)){
         contRepetidos++;
-        printf("%d\n",contRepetidos);
+        // Debbugin -->>printf("%d\n",contRepetidos);
         for(i=0; i<n; i++){
             if(listRands[i] == listRands[i+1]){
                 listRands[i] = (rand()%(max-1))+1;
@@ -113,28 +113,35 @@ int contarLineas(FILE *fp){
 void mostrarLista(char **stringList, int n){
     int i,j;
     for(i=0;i<n;i++) {
-	    for(j=0;stringList[i][j]!='\0';j++){
+	    printf("   %d   ",i);
+        for(j=0;stringList[i][j]!='\0' && stringList[i][j]!='\n';j++){
             printf("%c",stringList[i][j]);
+            
 	    }
 	    printf("\n");
-	    j=0;
 	}
 }
 
-int *eliminarDuplicados(int *list, int *n){
-    int i,k=0;
-    int *listSinDuplicados = malloc(sizeof(int) * (*n));
-    for(i=0;i<(*n);i++){
-        if(!(list[i]==list[i+1]) && list[i]!=0){
-            listSinDuplicados[k]=list[i];
+void eliminarDuplicados(int *list, int *n){
+    int i,k=0,ncopy=*n,buffer[100100];
+    if(list[0]==0){
+        (*n)=(*n)-1;
+    }else{
+        buffer[k]=list[0];
+        k++;
+    }
+    for(i=1;i<(ncopy);i++){
+        if(list[i]!=list[i-1] && list[i]!=0){
+            buffer[k]=list[i];
             k++;
         }
         else{
-            (*n)--;
+            (*n)=(*n)-1;
         }
     }
-    return listSinDuplicados;
+    list=buffer;
 }
+
 
 int *listaLocalidades(char **listStrings, int n){
     int i=0, *lista;
@@ -148,34 +155,52 @@ int *listaLocalidades(char **listStrings, int n){
 	return lista;
 }
 
-char *devolverLocalidad(char *posBuff, char **listaStrings, int largoLista){
+void devolverLocalidad(char *localidad, char **listaLocalidades, int largoLista){
     int i=0;
-    char dumm_num[10], dumm_name[500];
+    char dumm_num[1010], dumm_name[1010];
     for(i=0; i<largoLista; i++){
-        sscanf(listaStrings[i],"%[^,] %*c %[^\n]", dumm_num, dumm_name);
-        if(!(strcmp(posBuff, dumm_num))){
-            strcpy(posBuff, dumm_name);
+        sscanf(listaLocalidades[i],"%[^,] %*c %[^\n]", dumm_num, dumm_name);
+        if(atoi(localidad) == atoi(dumm_num)){
+            strcpy(localidad, dumm_name);
         }
     }
-    return posBuff;
 }
 
+void trimSpaces(char *cadena)
+{
+    int indice = -1,  i = 0;
+    while(cadena[i] != '\0'){
+        if(cadena[i] != ' ' && cadena[i] != '\n'){
+            indice= i;
+        }
+        i++;
+    }
+    cadena[indice + 1] = '\0';
+}
 
 void writeOutput(FILE *fpOutput, char **arrayPersonas, int largoLista, char **arrayLocalidades, int largoListaLocalidades){ 
     int i=0;
-    char buffer[7][1010];
+    char buffer[6][1010],localidad[1010];
+
     for(i=0; i<(largoLista); i++){
-        sscanf(arrayPersonas[i], "%[^,]  %c  %[^,]  %*c  %[^,] %*c %[^,] %*c %c %*c %c", buffer[0], buffer[1],buffer[2],buffer[3],buffer[4],buffer[5],buffer[6]);
-        strcat(buffer[0],buffer[1]); 
-        strcat(buffer[0],buffer[2]); 
-        //en buffer [0] tenemos jorge,augusto
-        //buffer[3] es la localidad
-        //buffer[4] es edad
-        //buffer[5] es gen 
-        //buffer[6] gen interes
-        strcpy(buffer[3], devolverLocalidad(buffer[3], arrayLocalidades, largoListaLocalidades));
-        fprintf(fpOutput, "%s,%s,%s,%c,%c\n",  buffer[0], buffer[3],buffer[4],decodeGender(atoi(buffer[5])),decodeInterest(atoi(buffer[6])));
+        sscanf(arrayPersonas[i], "%[^,]  %*c  %[^,]  %*c  %[^,] %*c %[^,] %*c %c %*c %c", buffer[0],buffer[1],buffer[2],buffer[3],buffer[4],buffer[5]);
+        
+        //buffer [0] tenemos jnombre
+        //bufer[1] apellido
+        //buffer[2] es la localidad
+        //buffer[3] es edad
+        //buffer[4] es gen 
+        //buffer[5] gen interes
+        strcpy(localidad,buffer[2]);
+        devolverLocalidad(localidad, arrayLocalidades, largoListaLocalidades);
+        //printf("%s\n",buffer[2]);
+        //trimSpaces(buffer[2]);
+        //printf("%s,%s,%s,%s,%c,%c\n", buffer[0],buffer[1],buffer[2],buffer[3],decodeGender(atoi(buffer[4])),decodeInterest(atoi(buffer[5])));
+        fprintf(fpOutput, "%s,%s,%s,%s,%c,%c\n", buffer[0],buffer[1],buffer[2],buffer[3],decodeGender(atoi(buffer[4])),decodeInterest(atoi(buffer[5])));
     }
+    //for(i=0;i<largoListaLocalidades;i++){printf("%s\n",arrayLocalidades[i]);}
+
+
 }
 
 
@@ -193,22 +218,20 @@ int main(){
     listRands=listRand(n, max);
     rewind(fp);
     arrayPersonas = leerArchivos(fp,listRands,n, max);
-    mostrarLista(arrayPersonas,n);// Muestra la lista de personas
+    //mostrarLista(arrayPersonas,n);// Muestra la lista de personas
     fclose( fp );
 
 
     
 	//______Lista de localidades a leer del archivo localidades.txt____
 	arrayNumsLocalidadesInt=listaLocalidades(arrayPersonas,n);
+
     nInicial=n;
     numeroIngresado=&n;
-    arrayNumsLocalidadesInt=eliminarDuplicados(arrayNumsLocalidadesInt,numeroIngresado);
-    //debuggin --> for(i=0;i<n;i++){printf("%d\n",arrayNumsLocalidadesInt[i]);}
-
-
+    eliminarDuplicados(arrayNumsLocalidadesInt,numeroIngresado);
 
     //__________Lectura de localidades___________
-	fp = fopen("codigoLocalidades.txt", "r");
+    fp = fopen("codigoLocalidades.txt", "r");
     max = contarLineas(fp);
     rewind(fp);
     arrayLocalidades=leerArchivos(fp, arrayNumsLocalidadesInt, n, max);
@@ -222,9 +245,9 @@ int main(){
 
 
 
-
     free(listRands);
     free(arrayPersonas);
+    //free(arrayLocalidades);
     free(arrayNumsLocalidadesInt);
 	return 0;
 }
