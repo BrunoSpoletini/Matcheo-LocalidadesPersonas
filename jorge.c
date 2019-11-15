@@ -49,7 +49,7 @@ char decodeInterest(int x){
 }
 char **leerArchivos(FILE *fp, int *linesToRead, int n, int max){
     int cantLeidos=0, i;
-    char **stringList ,buffer[101000];
+    char **stringList ,buffer[1010];
 	stringList= malloc(sizeof(char*)*n);
     for(i=1;i<=max && cantLeidos<n;i++){
         fgets(buffer,10100,fp);
@@ -112,11 +112,10 @@ int contarLineas(FILE *fp){
 
 
 void eliminarDuplicados(int *list, int *n){
-    int i,k=0,ncopy=*n,buffer[10010];
+    int i,k=0,ncopy=*n,buffer[100100];
     buffer[k]=list[0];
-    k++;
     for(i=1;i<(ncopy);i++){
-        if(list[i]!=list[i-1]){
+        if(list[i]!=list[i-1] && list[i]!=0){
             buffer[k]=list[i];
             k++;
         }
@@ -124,15 +123,13 @@ void eliminarDuplicados(int *list, int *n){
             (*n)=(*n)-1;
         }
     }
-    for(i=0;i<(*n);i++){
-        list[i]=buffer[i];
-    }
+    list=buffer;
 }
 
 
 int *listaLocalidades(char **listStrings, int n){
     int i=0, *lista;
-	char buffer[6][10100];
+	char buffer[6][1010];
 	lista = malloc(sizeof(int) * n);
 	for(i = 0; i < n; i++){
 		sscanf(listStrings[i],"%[^,]  %c  %[^,]  %c  %[^,]  %[^\n]",buffer[0], buffer[1], buffer[2], buffer[3], buffer[4], buffer[5]);
@@ -164,7 +161,7 @@ void trimSpaces(char *cadena)
     }
     cadena[indice + 1] = '\0';
 }
-
+/*//*/
 void writeOutput(FILE *fpOutput, char **arrayPersonas, int largoLista, char **arrayLocalidades, int largoListaLocalidades){ 
     int i=0;
     char buffer[6][1010],localidad[1010];
@@ -196,9 +193,12 @@ void writeOutput(FILE *fpOutput, char **arrayPersonas, int largoLista, char **ar
 void mostrarLista(char **stringList, int n){
     int i,j;
     for(i=0;i<n;i++){
-            printf("%d =  %s",i, stringList[i]);  
+            printf("%s",stringList[i]);  
         }
 	}
+
+
+
 
 int main(){
     int i,n ,max , *listRands, *arrayNumsLocalidadesInt, *numeroIngresado, nInicial;
@@ -217,32 +217,34 @@ int main(){
     
 	//______Lista de localidades a leer del archivo localidades.txt____
 	arrayNumsLocalidadesInt=listaLocalidades(arrayPersonas,n);
-
     nInicial=n;
     numeroIngresado=&n;
     eliminarDuplicados(arrayNumsLocalidadesInt,numeroIngresado);
-    for(i=0;i<n;i++){printf("%d:  %d\n",i, arrayNumsLocalidadesInt[i]);}
 
+    //for(i=0;i<n;i++){printf("%d:  %d\n",i, arrayNumsLocalidadesInt[i]);}
 
+/*/
     //__________Lectura de localidades___________
     fp2 = fopen("codigoLocalidades.txt", "r");
     max = contarLineas(fp2);
     rewind(fp2);
     arrayLocalidades=leerArchivos(fp2, arrayNumsLocalidadesInt, n, max);
     fclose(fp2);
+    
     mostrarLista(arrayLocalidades,n);
-   
-/*/
+    
+
     //_____________Escritura_____________-
     fp3= fopen("Output.txt", "w+");
     writeOutput(fp3, arrayPersonas, nInicial,arrayLocalidades,n);
     fclose(fp3);
+
 /*/
 
     free(listRands);
     free(arrayPersonas);
     free(arrayNumsLocalidadesInt);
 
-    free(arrayLocalidades);
+   // free(arrayLocalidades);
 	return 0;
 }
