@@ -163,18 +163,18 @@ char *devolverLocalidad(char *posBuff, char **listaStrings, int largoLista){
 
 void writeOutput(FILE *fpOutput, char **arrayPersonas, int largoLista, char **arrayLocalidades, int largoListaLocalidades){ 
     int i=0;
-    char buffer[11][1010];
+    char buffer[7][1010];
     for(i=0; i<(largoLista); i++){
-        sscanf(arrayPersonas[i], "%[^,]  %c  %[^,]  %c  %[^,] %c %[^,] %c %c %c %c", buffer[0], buffer[1],buffer[2],buffer[3],buffer[4],buffer[5],buffer[6],buffer[7],buffer[8],buffer[9],buffer[10]);
+        sscanf(arrayPersonas[i], "%[^,]  %c  %[^,]  %*c  %[^,] %*c %[^,] %*c %c %*c %c", buffer[0], buffer[1],buffer[2],buffer[3],buffer[4],buffer[5],buffer[6]);
         strcat(buffer[0],buffer[1]); 
         strcat(buffer[0],buffer[2]); 
         //en buffer [0] tenemos jorge,augusto
-        //buffer[4] es la localidad
-        //buffer[6] es edad
-        //buffer[8] es gen 
-        //buffer[10] gen interes
-        strcpy(buffer[4], devolverLocalidad(buffer[4], arrayLocalidades, largoListaLocalidades));
-        fprintf(fpOutput, "%s,%s,%s,%c,%c\n",  buffer[0], buffer[4],buffer[6],decodeGender(atoi(buffer[8])),decodeInterest(atoi(buffer[10])));
+        //buffer[3] es la localidad
+        //buffer[4] es edad
+        //buffer[5] es gen 
+        //buffer[6] gen interes
+        strcpy(buffer[3], devolverLocalidad(buffer[3], arrayLocalidades, largoListaLocalidades));
+        fprintf(fpOutput, "%s,%s,%s,%c,%c\n",  buffer[0], buffer[3],buffer[4],decodeGender(atoi(buffer[5])),decodeInterest(atoi(buffer[6])));
     }
 }
 

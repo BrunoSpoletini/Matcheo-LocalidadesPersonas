@@ -1,10 +1,10 @@
-HAYDEE,NARANJO,ABROJO-MONTEZUMA                                   ,83,F,N
-CECILIA,MASIS,SAN RAFAEL                                              ,14,F,A
-FERNANDO,MORA,CANADA                                                 ,48,M,A
-ABILIAN,CHAVARRIA,H.A. SAN RAFAEL                                         ,76,M,M
-IMELDA DEL CARMEN,CHAVES,LA AURORA                                    ,9,F,A
-GLADYS,VEGA,PALMIRA                                              ,16,F,F
-NORMAN,PICADO,SAN ROQUE                                               ,36,M,A
-MARINA,QUESADA,PURIRES                                ,27,F,N
-ANA CECILIA,ARCE,LA JULIETA                                            ,28,F,N
-MARIA ANTONIETA,VELAZCO,DRAKE                                       ,60,F,M
+LETICIA,IOCAMPOS,LOS PLANES                                           ,12,F,M
+JUAN,IORAMIREZ,CARRILLOS BAJO                                             ,16,M,M
+DORA,IOVALERIN,CRISTO REY                                        ,61,F,N
+ADA,IOARIAS,CACHI                                                    ,39,F,M
+VICTOR MANUEL,IOMADRIGAL,LA TRINIDAD,39,M,N
+CLAUDINA,IOMONTERO,CATARATA                                              ,53,F,F
+JOSE VICENTE,IOMONGE,SANTA RITA                                                 ,79,M,F
+IBO ANTONIO,IOSOLIS,CONCEPCION                                            ,52,M,F
+GERARDO,IOJIMENEZ,H.A. SAN VICENTE DE PAUL                             ,57,M,N
+ROCIO,IOCERVILLA,SAN JUAN SUR                                               ,32,F,M
