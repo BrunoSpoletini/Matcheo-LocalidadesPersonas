@@ -49,8 +49,9 @@ char decodeInterest(int x){
 }
 char **leerArchivos(FILE *fp, int *linesToRead, int n, int max){
     int cantLeidos=0, i;
+    
     char **stringList ,buffer[101000];
-	stringList= malloc(sizeof(char*)*n);
+	stringList= malloc(sizeof(char*)*n+1);
     for(i=1;i<=max && cantLeidos<n;i++){
         fgets(buffer,10100,fp);
         if(i==linesToRead[cantLeidos]){
@@ -83,6 +84,8 @@ int *listRand(int n, int max){
     int contRepetidos=0;
 
     listRands=malloc(sizeof(int)*n);
+    if (listRands == NULL) 
+        printf("malloc failed\n");
     srand(time(NULL));
     for(i=0; i<n; i++){
 		listRands[i] = (rand()%(max-1))+1;
@@ -111,12 +114,15 @@ int contarLineas(FILE *fp){
 }
 
 
-void eliminarDuplicados(int *list, int *n){
-    int i,k=0,ncopy=*n,buffer[10010];
+int  *eliminarDuplicados(int *list, int *n){
+    int i,k=0,ncopy=*n;
+    int *buffer=malloc(sizeof(int)*(*n));
+
     buffer[k]=list[0];
     k++;
+    
     for(i=1;i<(ncopy);i++){
-        if(list[i]!=list[i-1]){
+        if(list[i]!=list[i-1] && list[i]!=0){
             buffer[k]=list[i];
             k++;
         }
@@ -124,9 +130,7 @@ void eliminarDuplicados(int *list, int *n){
             (*n)=(*n)-1;
         }
     }
-    for(i=0;i<(*n);i++){
-        list[i]=buffer[i];
-    }
+    return buffer;
 }
 
 
@@ -201,7 +205,7 @@ void mostrarLista(char **stringList, int n){
 	}
 
 int main(){
-    int i,n ,max , *listRands, *arrayNumsLocalidadesInt, *numeroIngresado, nInicial;
+    int i,n ,max , *listRands, *arrayNumsLocalidadesInt, *numeroIngresado, nInicial, *arrayNumsLocalidadesIntSinRep;
 	char **arrayPersonas, **arrayLocalidades;
     scanf("%d", &n);
 	FILE *fp1,*fp2,*fp3;
@@ -220,29 +224,30 @@ int main(){
 
     nInicial=n;
     numeroIngresado=&n;
-    eliminarDuplicados(arrayNumsLocalidadesInt,numeroIngresado);
-    for(i=0;i<n;i++){printf("%d:  %d\n",i, arrayNumsLocalidadesInt[i]);}
+    arrayNumsLocalidadesIntSinRep=eliminarDuplicados(arrayNumsLocalidadesInt,numeroIngresado);
+   // for(i=0;i<n;i++){printf("%d:  %d\n",i, arrayNumsLocalidadesIntSinRep[i]);}
 
 
     //__________Lectura de localidades___________
     fp2 = fopen("codigoLocalidades.txt", "r");
     max = contarLineas(fp2);
     rewind(fp2);
-    arrayLocalidades=leerArchivos(fp2, arrayNumsLocalidadesInt, n, max);
+    arrayLocalidades=leerArchivos(fp2, arrayNumsLocalidadesIntSinRep, n, max);
     fclose(fp2);
-    mostrarLista(arrayLocalidades,n);
+
    
-/*/
+
     //_____________Escritura_____________-
     fp3= fopen("Output.txt", "w+");
     writeOutput(fp3, arrayPersonas, nInicial,arrayLocalidades,n);
     fclose(fp3);
-/*/
+
 
     free(listRands);
     free(arrayPersonas);
-    free(arrayNumsLocalidadesInt);
 
+    free(arrayNumsLocalidadesInt);
+    free(arrayNumsLocalidadesIntSinRep);
     free(arrayLocalidades);
 	return 0;
 }
