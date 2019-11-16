@@ -93,7 +93,7 @@ int *listRand(int n, int max){
 	qsort(listRands, n, sizeof(int), greaterEqual);
     while(hayRepetidos(listRands, n)){
         contRepetidos++;
-        // Debbugin -->>printf("%d\n",contRepetidos);
+        // debbugprintf("%d\n",contRepetidos);
         for(i=0; i<n; i++){
             if(listRands[i] == listRands[i+1]){
                 listRands[i] = (rand()%(max-1))+1;
@@ -166,12 +166,12 @@ void trimSpaces(char *cadena)
         }
         i++;
     }
-    cadena[indice + 1] = '\0';
+    cadena[indice] = '\0';
 }
 
 void writeOutput(FILE *fpOutput, char **arrayPersonas, int largoLista, char **arrayLocalidades, int largoListaLocalidades){ 
     int i=0;
-    char buffer[6][1010],localidad[1010];
+    char buffer[6][1010];
 
     for(i=0; i<(largoLista); i++){
         sscanf(arrayPersonas[i], "%[^,]  %*c  %[^,]  %*c  %[^,] %*c %[^,] %*c %c %*c %c", buffer[0],buffer[1],buffer[2],buffer[3],buffer[4],buffer[5]);
@@ -182,14 +182,14 @@ void writeOutput(FILE *fpOutput, char **arrayPersonas, int largoLista, char **ar
         //buffer[3] es edad
         //buffer[4] es gen 
         //buffer[5] gen interes
-        strcpy(localidad,buffer[2]);
-        devolverLocalidad(localidad, arrayLocalidades, largoListaLocalidades);
+ 
+        devolverLocalidad(buffer[2], arrayLocalidades, largoListaLocalidades);
         //printf("%s\n",buffer[2]);
-        //trimSpaces(buffer[2]);
+        trimSpaces(buffer[2]);
         //printf("%s,%s,%s,%s,%c,%c\n", buffer[0],buffer[1],buffer[2],buffer[3],decodeGender(atoi(buffer[4])),decodeInterest(atoi(buffer[5])));
         fprintf(fpOutput, "%s,%s,%s,%s,%c,%c\n", buffer[0],buffer[1],buffer[2],buffer[3],decodeGender(atoi(buffer[4])),decodeInterest(atoi(buffer[5])));
     }
-    //for(i=0;i<largoListaLocalidades;i++){printf("%s\n",arrayLocalidades[i]);}
+
 
 
 }
