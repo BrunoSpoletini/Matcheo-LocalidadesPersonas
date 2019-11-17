@@ -146,16 +146,6 @@ int *listaLocalidades(char **listStrings, int n){
 	return lista;
 }
 
-void devolverLocalidad(char *localidad, char **listaLocalidades, int largoLista){
-    int i=0;
-    char dumm_num[1010], dumm_name[1010];
-    for(i=0; i<largoLista; i++){
-        sscanf(listaLocalidades[i],"%[^,] %*c %[^\n]", dumm_num, dumm_name);
-        if(atoi(localidad) == atoi(dumm_num)){
-            strcpy(localidad, dumm_name);
-        }
-    }
-}
 
 void trimSpaces(char *cadena)
 {
@@ -166,10 +156,26 @@ void trimSpaces(char *cadena)
         }
         i++;
     }
-    cadena[indice] = '\0';
+    cadena[indice+1] = '\0';
 }
 
-void writeOutput(FILE *fpOutput, char **arrayPersonas, int largoLista, char **arrayLocalidades, int largoListaLocalidades){ 
+
+char **mapLocalidades(char **localidadesSinParsear, int n, int max){ 
+    int i=0;
+    char **localidadesParseadas, buffer_num[100], buffer_name[10000];
+    localidadesParseadas = malloc(sizeof(char*)*(max+1));
+
+    for(i=0; i<n;i++){
+        sscanf(localidadesSinParsear[i],"%[^,] %*c %[^\n]", buffer_num, buffer_name);
+        trimSpaces(buffer_name);
+        localidadesParseadas[atoi(buffer_num)] =  malloc(((strlen(buffer_name)+1)*sizeof(char)));
+        strcpy(localidadesParseadas[atoi(buffer_num)], buffer_name);
+    }
+    return localidadesParseadas;
+}
+
+
+void writeOutput(FILE *fpOutput, char **arrayPersonas, int largoLista, char **localidadesParseadas){ 
     int i=0;
     char buffer[6][1010];
 
@@ -183,41 +189,50 @@ void writeOutput(FILE *fpOutput, char **arrayPersonas, int largoLista, char **ar
         //buffer[4] es gen 
         //buffer[5] gen interes
  
-        devolverLocalidad(buffer[2], arrayLocalidades, largoListaLocalidades);
-        //printf("%s\n",buffer[2]);
-        trimSpaces(buffer[2]);
-        //printf("%s,%s,%s,%s,%c,%c\n", buffer[0],buffer[1],buffer[2],buffer[3],decodeGender(atoi(buffer[4])),decodeInterest(atoi(buffer[5])));
+        strcpy(buffer[2], localidadesParseadas[atoi(buffer[2])]);
         fprintf(fpOutput, "%s,%s,%s,%s,%c,%c\n", buffer[0],buffer[1],buffer[2],buffer[3],decodeGender(atoi(buffer[4])),decodeInterest(atoi(buffer[5])));
+ 
     }
-
-
-
 }
-
-
-//char *devolverLocalidad(){}
 
 void mostrarLista(char **stringList, int n){
     int i,j;
     for(i=0;i<n;i++){
             printf("%d =  %s",i, stringList[i]);  
-        }
+        
 	}
+}
 
 int main(){
     int i,n ,max , *listRands, *arrayNumsLocalidadesInt, *numeroIngresado, nInicial, *arrayNumsLocalidadesIntSinRep;
-	char **arrayPersonas, **arrayLocalidades;
-    scanf("%d", &n);
-	FILE *fp1,*fp2,*fp3;
+	char **arrayPersonas, **arrayLocalidades,**localidadesParseadas;
+    char f_personas[1010], f_localidades[1010];
+    printf("Ingrese el nombre del archivo que contiene la informacion de los usuarios, con su extension correspondiente\n");
+    scanf("%s", f_personas);
+	FILE *fp;
  
+
+
+
     //______________Lectura de personas________________
-	fp1 = fopen( "personas.txt", "r");
-    max = contarLineas(fp1); // Max es la cantidad de lineas en el archivo
+	fp = fopen( f_personas, "r");
+    if(fp == NULL){
+        printf("La apertura del archivo ha fallado");
+        return 0;
+    }
+    printf("Ingrese el numero de usuarios que quiere extraer del archivo\n");
+    scanf("%d", &n);
+    max = contarLineas(fp); // Max es la cantidad de lineas en el archivo
     listRands=listRand(n, max);
-    rewind(fp1);
-    arrayPersonas = leerArchivos(fp1,listRands,n, max);
+    rewind(fp);
+    
+    if(n > max){
+        printf("Este numero es demasiado grande, por favor seleccione otro\n");
+        scanf("%d", &n);
+    }
+    arrayPersonas = leerArchivos(fp,listRands,n, max);
     //mostrarLista(arrayPersonas,n);// Muestra la lista de personas
-    fclose( fp1 );
+    fclose(fp);
     
 	//______Lista de localidades a leer del archivo localidades.txt____
 	arrayNumsLocalidadesInt=listaLocalidades(arrayPersonas,n);
@@ -229,25 +244,35 @@ int main(){
 
 
     //__________Lectura de localidades___________
-    fp2 = fopen("codigoLocalidades.txt", "r");
-    max = contarLineas(fp2);
-    rewind(fp2);
-    arrayLocalidades=leerArchivos(fp2, arrayNumsLocalidadesIntSinRep, n, max);
-    fclose(fp2);
-
+    printf("Ingrese el nombre del archivo que contiene las localidades, con su extension correspondiente\n");
+    scanf("%s", f_localidades);
+    fp = fopen(f_localidades, "r");
+    if(fp == NULL){
+        printf("La apertura del archivo ha fallado");
+        return 0; 
+    }
+    max = contarLineas(fp);
+    rewind(fp);
+    arrayLocalidades=leerArchivos(fp, arrayNumsLocalidadesIntSinRep, n, max);
+    //for(i=0;i<n;i++){printf("%d:  %s\n",i, arrayLocalidades[i]);}
+    
+    fclose(fp);
+    localidadesParseadas=mapLocalidades(arrayLocalidades,n,max);
+    
    
 
     //_____________Escritura_____________-
-    fp3= fopen("Output.txt", "w+");
-    writeOutput(fp3, arrayPersonas, nInicial,arrayLocalidades,n);
-    fclose(fp3);
+    fp= fopen("Output.txt", "w+");
+    writeOutput(fp, arrayPersonas, nInicial,localidadesParseadas);
+    fclose(fp);
 
 
     free(listRands);
     free(arrayPersonas);
-
     free(arrayNumsLocalidadesInt);
     free(arrayNumsLocalidadesIntSinRep);
-    free(arrayLocalidades);
+    free(arrayLocalidades);    
+    free(localidadesParseadas);
+
 	return 0;
 }
