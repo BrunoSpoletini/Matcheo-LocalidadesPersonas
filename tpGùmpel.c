@@ -79,28 +79,54 @@ int hayRepetidos(int *list, int n){
 
 int *listRand(int n, int max){
     int i, *listRands;
-
-    //debugging   Hay que solucionar 
-    int contRepetidos=0;
-
+    
+    int contRepetidos=0; //debbug
     listRands=malloc(sizeof(int)*n);
-    if (listRands == NULL) 
-        printf("malloc failed\n");
     srand(time(NULL));
-    for(i=0; i<n; i++){
-		listRands[i] = (rand()%(max-1))+1;
-	}
-	qsort(listRands, n, sizeof(int), greaterEqual);
-    while(hayRepetidos(listRands, n)){
-        contRepetidos++;
-        // debbugprintf("%d\n",contRepetidos);
+    if(n <= max/2){
         for(i=0; i<n; i++){
-            if(listRands[i] == listRands[i+1]){
-                listRands[i] = (rand()%(max-1))+1;
-            }
+            listRands[i] = (rand()%(max-1))+1;
         }
         qsort(listRands, n, sizeof(int), greaterEqual);
+        while(hayRepetidos(listRands, n)){
+            contRepetidos++;
+            // debbugprintf("%d\n",contRepetidos);
+            for(i=0; i<n; i++){
+                if(listRands[i] == listRands[i+1]){
+                    listRands[i] = (rand()%(max-1))+1;
+                }
+            }
+            qsort(listRands, n, sizeof(int), greaterEqual);
+        }
+    }else{
+        int listaTotal[max];
+        int listNoLeer[max-n],contRands=0,j=0;
+        for(i=1; i<n; i++){
+            listaTotal[i] = 1;
+        }
+        for(i=0; i<(max - n); i++){
+            listNoLeer[i]= (rand()%(max-1))+1;
+        }
+        qsort(listNoLeer, max-n, sizeof(int), greaterEqual);
+        while(hayRepetidos(listNoLeer, max-n)){
+            for(i=0; i<max-n; i++){
+                if(listNoLeer[i] == listNoLeer[i+1]){
+                    listNoLeer[i] = (rand()%(max-1))+1;
+                }
+            }
+            qsort(listNoLeer, max-n, sizeof(int), greaterEqual);
+        }
+        for(i=1; i<=max; i++){
+            if(listNoLeer[j]==i){
+                j++;
+            }
+            else{
+                listRands[contRands]=i;
+                contRands++;
+            } 
+        }
     }
+    
     return listRands;
 }
 
@@ -207,9 +233,10 @@ int main(){
     int i,n ,max , *listRands, *arrayNumsLocalidadesInt, *numeroIngresado, nInicial, *arrayNumsLocalidadesIntSinRep;
 	char **arrayPersonas, **arrayLocalidades,**localidadesParseadas;
     char f_personas[1010], f_localidades[1010];
-    printf("Ingrese el nombre del archivo que contiene la informacion de los usuarios, con su extension correspondiente\n");
-    scanf("%s", f_personas);
-	FILE *fp;
+    //printf("Ingrese el nombre del archivo que contiene la informacion de los usuarios, con su extension correspondiente\n");
+    //scanf("%s", f_personas);
+	strcpy(f_personas,"personas.txt"); //Esto esta pq me da paja escribirlo cada vez sry
+    FILE *fp;
  
 
 
