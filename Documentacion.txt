@@ -1,0 +1,6 @@
+Documentación Trabajo Práctico 2
+Bruno Spoletini y Catalina Silvestri
+
+Para el correcto funcionamiento del programa, los archivos a utilizar en la entrada del mismo deberán estar codificados en latin1. Al ejecutar el programa se pedirá ingresar por teclado el nombre del archivo que contiene la información de los usuarios, el número de usuarios a extraer de esa lista y el nombre del archivo que contiene la información sobre las localidades.
+En caso de no encontrarse el archivo de entrada en la misma carpeta que el archivo del programa "tp2_Spoletini-Silvestri.c" se deberá ingresar el path correspondiente al archivo de entrada.
+La salida del programa será un archivo llamado "Output.txt", que contiene la información de tantas personas como el usuario ingrese por teclado. Dicho archivo podrá utilizarse como entrada para el programa del trabajo práctico 1 de esta materia.
